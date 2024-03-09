@@ -8,7 +8,7 @@ import { DarkMode } from "./ToggleDarkMode";
 
 export const NavigationMenu = () => {
   return (
-    <div className="flex justify-between items-center p-4">
+    <div className="flex justify-between items-center p-4 md:p-8">
       <div className="flex items-center">
         <Image
           src="/logo-dark-long.png"
@@ -19,7 +19,7 @@ export const NavigationMenu = () => {
         />
       </div>
       <NavigationMenuItems />
-      <div>
+      <div className="hidden md:block">
         <DarkMode />
       </div>
     </div>

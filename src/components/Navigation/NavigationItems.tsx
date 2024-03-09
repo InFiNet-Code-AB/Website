@@ -10,6 +10,7 @@ import {
 } from "@/components/shadcn/NavigationMenu";
 
 import React from "react";
+import { ContactFormDialog } from "../ContactForm/ContactForm";
 
 export const NavigationMenuItems = () => {
   return (
@@ -28,9 +29,7 @@ export const NavigationMenuItems = () => {
           <NavigationMenuContent></NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuTrigger className="text-2xl font-bold gradient-text">
-            Contact
-          </NavigationMenuTrigger>
+          <ContactFormDialog />
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
