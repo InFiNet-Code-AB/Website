@@ -1,5 +1,6 @@
 import { ChatBubbleIcon } from "@radix-ui/react-icons";
 import { Button } from "../shadcn/Button";
+import Image from "next/image";
 import {
   Dialog,
   DialogClose,
@@ -14,6 +15,7 @@ import { ContactFormContent } from "./ContactFormContent";
 import { isMobile } from "react-device-detect";
 
 export const ContactFormDialog = () => {
+  const bgClass = isMobile ? "bg-gray-800" : "bg-transparent";
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -22,24 +24,25 @@ export const ContactFormDialog = () => {
             <ChatBubbleIcon className="mr-2 h-4 w-4" /> Get in Contact
           </Button>
         ) : (
-          <p className="dark:text-white text-2xl font-bold cursor-pointer">
+          <p className="dark:text-white text-lg font-semibold cursor-pointer tracking-wider mx-4">
             Contact
           </p>
         )}
       </DialogTrigger>
-      <DialogContent className="sm:max-w-lg bg-transparent">
+      <DialogContent className={`sm:max-w-lg text-white ${bgClass}`}>
         <DialogHeader>
-          <DialogTitle>Feel free to contact us about anything</DialogTitle>
+          <Image
+            src="/logo-dark-long.png"
+            alt="InFiNet Code AB logo"
+            width={150}
+            height={50}
+          />
+          <DialogTitle className="pt-4">
+            Feel free to contact us about anything
+          </DialogTitle>
           <DialogDescription>We are here to help</DialogDescription>
         </DialogHeader>
         <ContactFormContent />
-        <DialogFooter className="sm:justify-start">
-          {/* <DialogClose asChild>
-            <Button type="button" variant="secondary">
-              Close
-            </Button>
-          </DialogClose> */}
-        </DialogFooter>
       </DialogContent>
     </Dialog>
   );

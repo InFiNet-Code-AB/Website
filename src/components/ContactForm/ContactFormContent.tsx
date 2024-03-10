@@ -16,9 +16,17 @@ import { Input } from "../shadcn/Input";
 import { Button } from "../shadcn/Button";
 import { Checkbox } from "../shadcn/Checkbox";
 import { Label } from "../shadcn/Label";
+import { DialogClose, DialogFooter } from "../shadcn/Dialog";
+import { isMobile } from "react-device-detect";
 
 const formSchema = z.object({
   name: z.string().min(2, {
+    message: "Username must be at least 2 characters.",
+  }),
+  email: z.string().min(2, {
+    message: "Username must be at least 2 characters.",
+  }),
+  telnr: z.string().min(2, {
     message: "Username must be at least 2 characters.",
   }),
   company: z.string().min(2, {
@@ -28,11 +36,14 @@ const formSchema = z.object({
 });
 
 export const ContactFormContent = () => {
+  const formStyle = isMobile ? "" : "flex justify-between";
   // 1. Define your form.
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
+      email: "",
+      telnr: "",
       company: "",
       projectType: [""], // Adjusted to an empty array
     },
@@ -40,12 +51,13 @@ export const ContactFormContent = () => {
 
   const { setValue } = form;
 
-  const handleCheckboxChange = (value: string) => {
-    const currentProjectTypes = form.getValues().projectType;
-    const newProjectTypes = currentProjectTypes.includes(value)
-      ? currentProjectTypes.filter((type) => type !== value)
-      : [...currentProjectTypes, value];
-
+  const handleCheckboxChange = (typeOfHelp: string) => {
+    let newProjectTypes = form.getValues().projectType;
+    if (newProjectTypes.includes(typeOfHelp)) {
+      newProjectTypes = newProjectTypes.filter((help) => help !== typeOfHelp);
+    } else {
+      newProjectTypes.push(typeOfHelp);
+    }
     setValue("projectType", newProjectTypes);
   };
 
@@ -57,54 +69,83 @@ export const ContactFormContent = () => {
   }
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Name</FormLabel>
-              <FormControl>
-                <Input placeholder="Your name" {...field} />
-              </FormControl>
-              {/* <FormDescription>
-                This is your public display name.
-              </FormDescription> */}
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="company"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Company</FormLabel>
-              <FormControl>
-                <Input placeholder="Your Company" {...field} />
-              </FormControl>
-              {/* <FormDescription>
-                This is your public display name.
-              </FormDescription> */}
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-8 text-white"
+      >
+        <div className={`${formStyle}`}>
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Name</FormLabel>
+                <FormControl>
+                  <Input placeholder="Your name" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Email</FormLabel>
+                <FormControl>
+                  <Input placeholder="Your email" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+        <div className={`${formStyle}`}>
+          <FormField
+            control={form.control}
+            name="telnr"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Mobile number</FormLabel>
+                <FormControl>
+                  <Input placeholder="mobile number" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="company"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Company</FormLabel>
+                <FormControl>
+                  <Input placeholder="Your Company" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+
         <FormField
           control={form.control}
           name="projectType"
           render={({ field }) => (
             <FormItem>
-              <div className="grid grid-cols-3 gap-4">
+              <Label>What are you interested in ?</Label>
+              <div className="grid grid-cols-2 gap-4">
                 {/* First row */}
                 <FormControl>
                   <div className="flex items-center space-x-2">
                     <Checkbox
                       {...field}
-                      value="Project Type 1"
-                      onChange={() => handleCheckboxChange("Project Type 1")}
+                      value="IT Consultants"
+                      onClick={() => handleCheckboxChange("IT Consultants")}
                     />
-                    <Label>Project 1</Label>
+                    <Label className="text-xs">IT Consultants</Label>
                   </div>
                   {/* Add more checkboxes as needed */}
                 </FormControl>
@@ -113,10 +154,12 @@ export const ContactFormContent = () => {
                   <div className="flex items-center space-x-2">
                     <Checkbox
                       {...field}
-                      value="Project Type 2"
-                      onChange={() => handleCheckboxChange("Project Type 2")}
+                      value="Software Development"
+                      onClick={() =>
+                        handleCheckboxChange("Software Development")
+                      }
                     />
-                    <Label>Project 2</Label>
+                    <Label className="text-xs">Software Development</Label>
                   </div>
                   {/* Add more checkboxes as needed */}
                 </FormControl>
@@ -125,10 +168,12 @@ export const ContactFormContent = () => {
                   <div className="flex items-center space-x-2">
                     <Checkbox
                       {...field}
-                      value="Project Type 3"
-                      onChange={() => handleCheckboxChange("Project Type 3")}
+                      value="Project Architecture"
+                      onClick={() =>
+                        handleCheckboxChange("Project Architecture")
+                      }
                     />
-                    <Label>Project 3</Label>
+                    <Label className="text-xs">Project Architecture</Label>
                   </div>
                 </FormControl>
 
@@ -136,39 +181,50 @@ export const ContactFormContent = () => {
                   <div className="flex items-center space-x-2">
                     <Checkbox
                       {...field}
-                      value="Project Type 4"
-                      onChange={() => handleCheckboxChange("Project Type 4")}
+                      value="UI / UX"
+                      onClick={() => handleCheckboxChange("UI / UX")}
                     />
-                    <Label>Project 4</Label>
+                    <Label className="text-xs">UI / UX</Label>
                   </div>
                 </FormControl>
                 <FormControl>
                   <div className="flex items-center space-x-2">
                     <Checkbox
                       {...field}
-                      value="Project Type 5"
-                      onChange={() => handleCheckboxChange("Project Type 5")}
+                      value="Mentorship & Coaching"
+                      onClick={() =>
+                        handleCheckboxChange("Mentorship & Coaching")
+                      }
                     />
-                    <Label>Project 5</Label>
+                    <Label className="text-xs">Mentorship & Coaching</Label>
                   </div>
                 </FormControl>
                 <FormControl>
                   <div className="flex items-center space-x-2">
                     <Checkbox
                       {...field}
-                      value="Project Type 6"
-                      onChange={() => handleCheckboxChange("Project Type 6")}
+                      value="Interships + LIA"
+                      onClick={() => handleCheckboxChange("Interships + LIA")}
                     />
-                    <Label>Project 6</Label>
+                    <Label className="text-xs">Interships + LIA</Label>
                   </div>
                 </FormControl>
               </div>
             </FormItem>
           )}
         />
-        <Button type="submit" variant="outline">
-          Submit
-        </Button>
+        <div className="flex justify-between">
+          <DialogFooter className="sm:justify-start">
+            <DialogClose asChild>
+              <Button type="button" variant="outline">
+                Close
+              </Button>
+            </DialogClose>
+          </DialogFooter>
+          <Button type="submit" variant="outline">
+            Submit
+          </Button>
+        </div>
       </form>
     </Form>
   );

@@ -2,11 +2,8 @@
 
 import {
   NavigationMenu,
-  NavigationMenuContent,
   NavigationMenuItem,
-  NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger,
 } from "@/components/shadcn/NavigationMenu";
 
 import React from "react";
@@ -16,17 +13,11 @@ export const NavigationMenuItems = () => {
   return (
     <NavigationMenu className="flex justify-center items-center">
       <NavigationMenuList>
-        <NavigationMenuItem>
-          <NavigationMenuTrigger className="dark:text-white text-2xl font-bold">
-            About
-          </NavigationMenuTrigger>
-          <NavigationMenuContent></NavigationMenuContent>
+        <NavigationMenuItem className="dark dark:text-white text-lg font-semibold cursor-pointer tracking-wider mx-4">
+          About
         </NavigationMenuItem>
-        <NavigationMenuItem>
-          <NavigationMenuTrigger className="dark:text-white text-2xl font-bold">
-            Portfolio
-          </NavigationMenuTrigger>
-          <NavigationMenuContent></NavigationMenuContent>
+        <NavigationMenuItem className="dark dark:text-white text-lg font-semibold cursor-pointer tracking-wider mx-4">
+          Portfolio
         </NavigationMenuItem>
         <NavigationMenuItem>
           <ContactFormDialog />
