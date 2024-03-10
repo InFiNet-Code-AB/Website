@@ -17,12 +17,10 @@ export const NavigationMenu = () => {
   const { theme } = useTheme();
 
   useEffect(() => {
-    console.log("here");
     renderLogoBasedOnTheme(theme);
   }, [theme]);
 
   const renderLogoBasedOnTheme = (theme: string | undefined) => {
-    console.log(theme);
     if (theme === "dark")
       return (
         <Image

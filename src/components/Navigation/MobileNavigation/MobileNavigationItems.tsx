@@ -15,6 +15,7 @@ import {
   LightningBoltIcon,
 } from "@radix-ui/react-icons";
 import React from "react";
+import { DarkMode } from "../ToggleDarkMode";
 
 export const MobileNavigationItems = () => {
   return (
@@ -34,6 +35,7 @@ export const MobileNavigationItems = () => {
             Show me their projects
           </Button>
           <ContactFormDialog />
+          <DarkMode />
         </div>
         <DrawerClose asChild>
           <Button variant="ghost" className="p-4">

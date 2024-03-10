@@ -17,7 +17,7 @@ export const NavigationMenuItems = () => {
     <NavigationMenu className="flex justify-center items-center">
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavigationMenuTrigger className="text-2xl font-bold gradient-text">
+          <NavigationMenuTrigger className="dark:text-white text-2xl font-bold">
             About
           </NavigationMenuTrigger>
           <NavigationMenuContent></NavigationMenuContent>
