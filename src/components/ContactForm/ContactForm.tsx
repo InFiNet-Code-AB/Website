@@ -22,12 +22,12 @@ export const ContactFormDialog = () => {
             <ChatBubbleIcon className="mr-2 h-4 w-4" /> Get in Contact
           </Button>
         ) : (
-          <p className="text-2xl font-bold gradient-text cursor-pointer">
+          <p className="dark:text-white text-2xl font-bold cursor-pointer">
             Contact
           </p>
         )}
       </DialogTrigger>
-      <DialogContent className="sm:max-w-lg bg-black">
+      <DialogContent className="sm:max-w-lg bg-transparent">
         <DialogHeader>
           <DialogTitle>Feel free to contact us about anything</DialogTitle>
           <DialogDescription>We are here to help</DialogDescription>

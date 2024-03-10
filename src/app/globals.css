@@ -10,7 +10,7 @@
 
 @layer components {
   .my-dark-bg {
-    @apply bg-gradient-to-l from-fuchsia-900 to-violet-900;
+    @apply bg-gradient-to-r from-slate-900 to-indigo-900;
   }
 }
 

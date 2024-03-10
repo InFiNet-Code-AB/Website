@@ -23,7 +23,7 @@ export const NavigationMenuItems = () => {
           <NavigationMenuContent></NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuTrigger className="text-2xl font-bold gradient-text">
+          <NavigationMenuTrigger className="dark:text-white text-2xl font-bold">
             Portfolio
           </NavigationMenuTrigger>
           <NavigationMenuContent></NavigationMenuContent>
