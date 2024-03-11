@@ -84,12 +84,7 @@ export const ContactFormContent: React.FC<FormContentProps> = ({ setOpen }) => {
     setValue("projectType", newProjectTypes);
   };
 
-  async function onSubmit(
-    values: z.infer<typeof formSchema>,
-    e: React.FormEvent<HTMLFormElement>
-  ) {
-    e.preventDefault();
-
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     const res = await fetch("/api/email/sendMail", {
       method: "POST",
       headers: {
@@ -97,6 +92,7 @@ export const ContactFormContent: React.FC<FormContentProps> = ({ setOpen }) => {
       },
       body: JSON.stringify(values),
     });
+
     const json = await res.json();
     console.log(json);
     setOpen(false);
@@ -107,8 +103,8 @@ export const ContactFormContent: React.FC<FormContentProps> = ({ setOpen }) => {
       //   onClick: () => console.log("Undo"),
       // },
     });
-    console.log(values);
   }
+
   return (
     <Form {...form}>
       <form

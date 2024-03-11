@@ -112,8 +112,15 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         html: emailContent,
       });
       res.status(200).json({ success: true });
-    } catch (error) {
-      res.status(400).json({ success: false, message: error.message });
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        res.status(400).json({ success: false, message: error.message });
+      } else {
+        console.error(error);
+        res
+          .status(500)
+          .json({ success: false, message: "An unexpected error occurred." });
+      }
     }
   } else {
     return res.status(405).json({ message: "Method Not Allowed" });
