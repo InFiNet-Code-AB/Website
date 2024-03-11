@@ -15,7 +15,7 @@ import { ContactFormContent } from "./ContactFormContent";
 import { isMobile } from "react-device-detect";
 
 export const ContactFormDialog = () => {
-  const bgClass = isMobile ? "bg-gray-800" : "bg-transparent";
+  const bgClass = isMobile ? "bg-gray-800 overflow-auto" : "bg-transparent";
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -29,7 +29,7 @@ export const ContactFormDialog = () => {
           </p>
         )}
       </DialogTrigger>
-      <DialogContent className={`sm:max-w-lg text-white ${bgClass}`}>
+      <DialogContent className={`sm:max-w-lg h-fit text-white ${bgClass}`}>
         <DialogHeader>
           <Image
             src="/logo-dark-long.png"

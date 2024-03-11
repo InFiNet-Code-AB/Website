@@ -19,37 +19,41 @@ import { Label } from "../shadcn/Label";
 import { DialogClose, DialogFooter } from "../shadcn/Dialog";
 import { isMobile } from "react-device-detect";
 import { Switch } from "../shadcn/Switch";
+import { toast } from "sonner";
+import { Textarea } from "../shadcn/Textarea";
 
 const phoneRegex = new RegExp(
   /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/
 );
 
-const formSchema = z
-  .object({
-    name: z.string().min(2, {
-      message: "Name must be at least 2 characters.",
+const formSchema = z.object({
+  name: z.string().min(2, {
+    message: "Name must be at least 2 characters.",
+  }),
+  email: z.string().email({
+    message: "Please enter a valid email address.",
+  }),
+  telnr: z.string().regex(phoneRegex, "Invalid phone number format."),
+  company: z.string().min(2, {
+    message: "Company name invalid",
+  }),
+  projectType: z.array(z.string()).refine((data) => data.length > 1, {
+    message: "No checkbox selected",
+  }),
+  contactByEmail: z.boolean(),
+  contactByMobile: z.boolean(),
+  userMessage: z
+    .string()
+    .min(10, {
+      message: "Message must be at least 10 characters.",
+    })
+    .max(500, {
+      message: "Message must not be longer than 500 characters.",
     }),
-    email: z.string().email({
-      message: "Please enter a valid email address.",
-    }),
-    telnr: z.string().regex(phoneRegex, "Invalid phone number format."),
-    company: z.string().min(2, {
-      message: "Company name invalid",
-    }),
-    projectType: z.array(z.string()).refine((data) => data.length > 1, {
-      message: "No checkbox selected",
-    }),
-    contactByEmail: z.boolean(),
-    contactByMobile: z.boolean(),
-  })
-  .refine((data) => data.contactByEmail || data.contactByMobile, {
-    message: "At least one contact method must be selected.",
-    path: ["contactByEmail", "contactByMobile"], // Specify the path to the fields for better error reporting
-  });
+});
 
 export const ContactFormContent = () => {
   const formStyle = isMobile ? "" : "flex justify-between";
-  // 1. Define your form.
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -60,6 +64,7 @@ export const ContactFormContent = () => {
       projectType: ["What type of help does this customer need ?"],
       contactByEmail: false,
       contactByMobile: false,
+      userMessage: "",
     },
   });
 
@@ -75,10 +80,14 @@ export const ContactFormContent = () => {
     setValue("projectType", newProjectTypes);
   };
 
-  // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
+    toast("📝 Message successfully sent ✅", {
+      description: "🚀 We will get back to you as soon as possible 🚀",
+      // action: {
+      //   label: "Undo",
+      //   onClick: () => console.log("Undo"),
+      // },
+    });
     console.log(values);
   }
   return (
@@ -245,6 +254,23 @@ export const ContactFormContent = () => {
                   </FormMessage>
                 )}
               </div>
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="userMessage"
+          render={({ field, fieldState: { error } }) => (
+            <FormItem>
+              <FormLabel>Your message to us</FormLabel>
+              <FormControl>
+                <Textarea placeholder="Use your words wisely" {...field} />
+              </FormControl>
+              {error && (
+                <FormMessage className="text-red-500">
+                  {error.message}
+                </FormMessage>
+              )}
             </FormItem>
           )}
         />

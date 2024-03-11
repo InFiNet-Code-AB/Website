@@ -25,7 +25,7 @@ const Switch = React.forwardRef<
       className={cn(
         "pointer-events-none block h-4 w-4 rounded-full bg-black shadow-lg ring-0 transition-transform",
         {
-          "translate-x-4": checked, // Move thumb when checked
+          "translate-x-5": checked, // Move thumb when checked
           "translate-x-0": !checked, // Reset thumb position when not checked
         }
       )}
