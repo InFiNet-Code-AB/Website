@@ -84,7 +84,21 @@ export const ContactFormContent: React.FC<FormContentProps> = ({ setOpen }) => {
     setValue("projectType", newProjectTypes);
   };
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(
+    values: z.infer<typeof formSchema>,
+    e: React.FormEvent<HTMLFormElement>
+  ) {
+    e.preventDefault();
+
+    const res = await fetch("/api/email/sendMail", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(values),
+    });
+    const json = await res.json();
+    console.log(json);
     setOpen(false);
     toast("📝 Message successfully sent ✅", {
       description: "🚀 We will get back to you as soon as possible 🚀",
