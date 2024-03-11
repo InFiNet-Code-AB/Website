@@ -22,6 +22,10 @@ import { Switch } from "../shadcn/Switch";
 import { toast } from "sonner";
 import { Textarea } from "../shadcn/Textarea";
 
+interface FormContentProps {
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
 const phoneRegex = new RegExp(
   /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/
 );
@@ -52,7 +56,7 @@ const formSchema = z.object({
     }),
 });
 
-export const ContactFormContent = () => {
+export const ContactFormContent: React.FC<FormContentProps> = ({ setOpen }) => {
   const formStyle = isMobile ? "" : "flex justify-between";
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -81,6 +85,7 @@ export const ContactFormContent = () => {
   };
 
   function onSubmit(values: z.infer<typeof formSchema>) {
+    setOpen(false);
     toast("📝 Message successfully sent ✅", {
       description: "🚀 We will get back to you as soon as possible 🚀",
       // action: {

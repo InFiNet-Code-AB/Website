@@ -13,11 +13,16 @@ import {
 } from "../shadcn/Dialog";
 import { ContactFormContent } from "./ContactFormContent";
 import { isMobile } from "react-device-detect";
+import React, { useState } from "react";
 
 export const ContactFormDialog = () => {
+  const [open, setOpen] = useState(false);
+
+  const closeDialog = () => setOpen(false);
+
   const bgClass = isMobile ? "bg-gray-800 overflow-auto" : "bg-transparent";
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         {isMobile ? (
           <Button variant="outline" className="text-xs">
@@ -42,7 +47,7 @@ export const ContactFormDialog = () => {
           </DialogTitle>
           <DialogDescription>We are here to help</DialogDescription>
         </DialogHeader>
-        <ContactFormContent />
+        <ContactFormContent setOpen={setOpen} />
       </DialogContent>
     </Dialog>
   );
