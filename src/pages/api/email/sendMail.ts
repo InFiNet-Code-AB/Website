@@ -93,7 +93,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                       <td align="left" style="padding:0;Margin:0;width:560px">
                        <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                          <tr>
-                          <td align="center" style="padding:0;Margin:0;font-size:0px"><img class="adapt-img" src="https://eewmgqn.stripocdn.email/content/guids/762d3cd9-bc0e-4c73-828f-0e5edd381fe9/images/logo_light_horizontal_350_x_75.jpg" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="350"></td>
+                          <td align="center" style="padding:0;Margin:0;font-size:0px"><img class="adapt-img" src="https://eewmgqn.stripocdn.email/content/guids/CABINET_af51cdf839d8a42a8bfa2dcf239c33cd44650dd4c438dc01540aa77ae35b05bc/images/logo_dark_horizontal_350_x_75.png" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="350"></td>
                          </tr>
                        </table></td>
                      </tr>
@@ -342,7 +342,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                       <td align="left" style="padding:0;Margin:0;width:560px">
                        <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                          <tr>
-                          <td align="center" class="made_with" style="padding:0;Margin:0;font-size:0px"><a target="_blank" href="https://viewstripo.email/?utm_source=templates&utm_medium=email&utm_campaign=business_1&utm_content=new_site" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#02687F;font-size:12px"><img src="https://eewmgqn.stripocdn.email/content/guids/762d3cd9-bc0e-4c73-828f-0e5edd381fe9/images/logo_light_horizontal_350_x_75.jpg" alt width="125" style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"></a></td>
+                          <td align="center" class="made_with" style="padding:0;Margin:0;font-size:0px"><a target="_blank" href="https://viewstripo.email/?utm_source=templates&utm_medium=email&utm_campaign=business_1&utm_content=new_site" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#02687F;font-size:12px"><img src="https://eewmgqn.stripocdn.email/content/guids/CABINET_af51cdf839d8a42a8bfa2dcf239c33cd44650dd4c438dc01540aa77ae35b05bc/images/logo_dark_horizontal_350_x_75.png" alt width="125" style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"></a></td>
                          </tr>
                        </table></td>
                      </tr>
